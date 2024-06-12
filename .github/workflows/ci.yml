@@ -23,7 +23,7 @@ jobs:
         context: .
         file: app/Dockerfile
         push: true
-        tags: ai-pytorch-app:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/ai-pytorch-app:${{ github.sha }}
       
     - name: Login to Docker Hub
       if: github.event_name == 'push'
