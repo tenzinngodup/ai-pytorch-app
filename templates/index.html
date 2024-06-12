@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI PyTorch App</title>
+</head>
+<body>
+    <h1>AI PyTorch App</h1>
+    <form action="/predict" method="post">
+        <label for="input_data">Input Data:</label>
+        <input type="text" id="input_data" name="input_data">
+        <input type="submit" value="Predict">
+    </form>
+    <div id="prediction"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const predictionDiv = document.getElementById('prediction');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const prediction = await response.text();
+            predictionDiv.textContent = `Prediction: ${prediction}`;
+        });
+    </script>
+</body>
+</html>
