@@ -19,7 +19,9 @@ jobs:
     
     - name: Build Docker image
       run: |
-        docker build -t ai-pytorch-app:${{ github.sha }} ./app
+        #  docker build -t ai-pytorch-app:${{ github.sha }} ./app
+        docker build . --file app/Dockerfile --tag ai-pytorch-app:$${{ github.sha }}
+
         
     # - name: Run tests
     #   run: |
