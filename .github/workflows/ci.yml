@@ -17,22 +17,22 @@ jobs:
     - name: Check Python version
       run: python --version
     
-    # - name: Build Docker image
-    #   run: |
-    #     docker build -t my-app:${{ github.sha }} ./app
+    - name: Build Docker image
+      run: |
+        docker build -t ai-pytorch-app:${{ github.sha }} ./app
         
     # - name: Run tests
     #   run: |
     #     docker run my-app:${{ github.sha }} python -m pytest tests/
         
-    # - name: Push Docker image
-    #   if: github.event_name == 'push'
-    #   run: |
-    #     docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-    #     docker push my-app:${{ github.sha }}
+    - name: Push Docker image
+      if: github.event_name == 'push'
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push ai-pytorch-app:${{ github.sha }}
         
-    # - name: Deploy to Kubernetes
-    #   if: github.event_name == 'push'
-    #   run: |
-    #     kubectl apply -f deployment.yaml
-    #     kubectl apply -f service.yaml
+    - name: Deploy to Kubernetes
+      if: github.event_name == 'push'
+      run: |
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
