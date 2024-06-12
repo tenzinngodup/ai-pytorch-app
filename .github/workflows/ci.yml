@@ -44,7 +44,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     
     - name: Push Docker image
-      run: docker push ai-pytorch-app:${{ github.sha }}
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/ai-pytorch-app:${{ github.sha }}
       
     - name: Deploy to Kubernetes
       run: |
